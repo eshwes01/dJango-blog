@@ -12,12 +12,21 @@ class Post(models.Model):
         on_delete=models.CASCADE, 
         related_name="blog_posts"
     )
-    # toppings = models.ManyToManyField(Topping)
-
+    
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
-    updated_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    field_1 = models.IntegerField(default=0)
+    field_2 = models.CharField(null = True)
+    def __str__(self):
+        return f"The title of the post is {self.title}"
+
+    class Meta:
+        ordering = ["created_on"]
+    def __str__(self):
+            return f"{self.title}| written by {self.author}"
+
 
 class Comment(models.Model):
     post = models.ForeignKey(
@@ -30,7 +39,11 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
         related_name="commenter"
     )
-
+    class Meta:
+        ordering = ["-created_on"]
+    def __str__(self):
+            return f"Comment {self.body}| written by {self.author}"
+    challenge = models.SlugField(default='slug_a')
     body = models.TextField()
     approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
