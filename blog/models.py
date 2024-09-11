@@ -19,6 +19,8 @@ class Post(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     field_1 = models.IntegerField(default=0)
     field_2 = models.CharField(null = True)
+    excerpt = models.CharField(null = True)
+    
     def __str__(self):
         return f"The title of the post is {self.title}"
 
@@ -39,10 +41,12 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
         related_name="commenter"
     )
+
     class Meta:
         ordering = ["-created_on"]
     def __str__(self):
             return f"Comment {self.body}| written by {self.author}"
+
     challenge = models.FloatField(default=3.0)
     body = models.TextField()
     approved = models.BooleanField(default=False)
