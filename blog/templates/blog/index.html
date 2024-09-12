@@ -27,6 +27,8 @@
                             <hr />
                             <p class="card-text text-muted h6">{{ post.created_on}}
                             </p>
+                                <p><a href="{% url 'post_detail' post.slug %}" class="post-link">
+                                </a></p>
                         </div>
                     </div>
                 </div>
