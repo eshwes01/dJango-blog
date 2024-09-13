@@ -26,10 +26,10 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!^pq(tdrilysn1^jxlb4l&z=&tz1w3p7(3_8)vajgzn3w9lcwo'
+SECRET_KEY = 'django-insecure-!^pq(tdrilysn1^jxlb4l&z=&tz1w3p7(3_8)vajgzn3w9lcwo111'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False 
+DEBUG = True 
 
 ALLOWED_HOSTS = ['8000-eshwes01-djangoblog-crw81qbk1fa.ws.codeinstitute-ide.net','.herokuapp.com']
 
