@@ -62,15 +62,12 @@
           </p>
 
           <div id="comment{{ comment.id }}">
-            {{ comment.body | linebreaks }}
+            {{ comment.body }}
           </div>
-          {% if not comment.approved and comment.author == user %}
-          <p class="approval">
-            This comment is awaiting approval
-          </p>
-          {% endif %}
+          <div class="p-2 comments
+            {% if not comment.approved and comment.author == user %}
+            faded{% elif not comment.approved %}d-none{% endif %}"> </div>
         </div>
-
         <!-- Our for loop ends here -->
         {% endfor %}
       </div>
@@ -92,7 +89,7 @@
           {% else %}
           <p>Log in to leave a comment</p>
           {% endif %}
-          
+
         </div>
       </div>
   </div>

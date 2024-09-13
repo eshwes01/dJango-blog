@@ -51,3 +51,8 @@ class Comment(models.Model):
     body = models.TextField()
     approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
+
+def profile_page(request):
+    user = get_object_or_404(User, user=request.user)
+    # Retrieve all comments for the user object
+    comments = user.commenter.all()
