@@ -1,17 +1,18 @@
-from django.shortcuts import render,get_object_or_404,reverse
+from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import Post, Comment
 from .forms import CommentForm
 
-# from django.http import HttpResponse
 
+# from django.http import HttpResponse
 class PostList(generic.ListView):
-        queryset = Post.objects.filter(status=1)
-        # template_name = "post_list.html"
-        template_name = "blog/index.html"
-        paginate_by = 6
+    queryset = Post.objects.filter(status=1)
+    # template_name = "post_list.html"
+    template_name = "blog/index.html"
+    paginate_by = 6
+
 
 def post_detail(request, slug):
     """
@@ -26,8 +27,7 @@ def post_detail(request, slug):
 
     :template:`blog/post_detail.html`
     """
-    queryset = Post.objects.filter(status=1)
-    
+    queryset = Post.objects.filter(status = 1)  
     post = get_object_or_404(queryset, slug=slug)
     # context = {"post": post,"coder": "May"}
     comments = post.comments.all().order_by("-created_on")
@@ -43,10 +43,7 @@ def post_detail(request, slug):
             comment.post = post
             comment.save()
             messages.add_message(
-                request, messages.SUCCESS,
-                'Comment submitted and awaiting approval'
-    )
-    
+                request, messages.SUCCESS, 'Comment submitted and awaiting approval')    
     comment_form = CommentForm()
     print("About to render template")
 
@@ -56,22 +53,22 @@ def post_detail(request, slug):
         {
             "post": post,
             "coder": "May",
-            "comments" : comments,
+            "comments": comments,
             "comment_count": comment_count,
-            "comment_form" : comment_form ,
+            "comment_form": comment_form,
         }
     )
+
+
 def comment_edit(request, slug, comment_id):
     """
     view to edit comments
     """
     if request.method == "POST":
-
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)
         comment = get_object_or_404(Comment, pk=comment_id)
-        comment_form = CommentForm(data=request.POST, 
-        instance=comment)
+        comment_form = CommentForm(data=request.POST, instance=comment)
 
         if comment_form.is_valid() and comment.author == request.user:
             comment = comment_form.save(commit=False)
@@ -81,8 +78,8 @@ def comment_edit(request, slug, comment_id):
             messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
         else:
             messages.add_message(request, messages.ERROR, 'Error updating comment!')
-
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
 
 def comment_delete(request, slug, comment_id):
     """
@@ -95,7 +92,9 @@ def comment_delete(request, slug, comment_id):
     if comment.author == request.user:
         comment.delete()
         messages.add_message(request, messages.SUCCESS, 'Comment deleted!')
+
     else:
+
         messages.add_message(request, messages.ERROR, 'You can only delete your own comments!')
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
@@ -103,4 +102,4 @@ def comment_delete(request, slug, comment_id):
 
 # # Create your views here.
 # def my_blog(request):
-#     return HttpResponse("Hello, Blog!")
+# return HttpResponse("Hello, Blog!")
