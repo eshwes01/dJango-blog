@@ -29,7 +29,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = 'django-insecure-!^pq(tdrilysn1^jxlb4l&z=&tz1w3p7(3_8)vajgzn3w9lcwo111'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True 
+DEBUG = False 
 
 ALLOWED_HOSTS = ['8000-eshwes01-djangoblog-crw81qbk1fa.ws.codeinstitute-ide.net','.herokuapp.com']
 
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'crispy_forms',
     'crispy_bootstrap5',
+    'cloudinary_storage',
 ]
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
